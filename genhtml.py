@@ -3,13 +3,14 @@
 execArray = {}
 execArray["0009"] = 0
 execArray["0027"] = 1
+execArray["0033"] = 0
 execArray["0065"] = 2
 execArray["0076"] = 1
 execArray["0077"] = 1
+execArray["0120"] = 0
 execArray["0126"] = 0
 execArray["0300"] = 1
 execArray["0395"] = 0
-execArray["0425"] = 1
 execArray["0430"] = 2
 execArray["0484"] = 1
 execArray["0571"] = 1
@@ -61,9 +62,11 @@ execArray["2029"] = 0
 execArray["2082"] = 0
 execArray["2136"] = 0
 execArray["2137"] = 0
+execArray["2142"] = 0
 execArray["2160"] = 1
 execArray["2161"] = 0
 execArray["2167"] = 0
+execArray["2174"] = 0
 execArray["2211"] = 0
 execArray["2243"] = 0
 execArray["2247"] = 1
@@ -71,6 +74,7 @@ execArray["2258"] = 1
 execArray["2309"] = 0
 execArray["2313"] = 0
 execArray["2330"] = 0
+execArray["2331"] = 0
 execArray["2392"] = 1
 execArray["2395"] = 0
 execArray["2401"] = 1
@@ -102,7 +106,7 @@ def getMyString(num):
                 s = str (num)
     return s
 
-ofile = open("test1.html", "w")
+ofile = open("out/new.html", "w")
 
 ofile.write("<!DOCTYPE html>\n")
 ofile.write("<html>\n")
@@ -112,6 +116,7 @@ ofile.write("table, th, td {\n")
 ofile.write("border: 1px solid orange;\n")
 ofile.write("border-collapse: collapse;\n")
 ofile.write("}\n")
+ofile.write(".pi {font-size:large; font-weight:bold; color:blue}\n")
 ofile.write("</style>\n")
 ofile.write("<title>Vietname CCC</title>\n")
 ofile.write("</head>\n")
@@ -124,7 +129,7 @@ ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
 
 flag = 0
 first_word = ""
-with open("in1.txt") as in1:
+with open("new/GLCG-part-1.txt") as in1:
     cnt = 0
     for line in in1:
 #        print("line {} flag {} contents {}".format(cnt, flag, line))
@@ -149,10 +154,11 @@ ofile.write("</table>")
 #p_index = 0
 p_index_str = "0000"
 exception_handling = 0
-o2 = open("temp2.txt", "w")
+#o2 = open("temp2.txt", "w")
 first_p = 1
+bold_index = 0
 
-with open("in2.txt") as in2:
+with open("new/GLCG-part-2.txt") as in2:
     cnt = 0
     for line in in2:
 #        print("cnt {} len {} text {}".format(cnt, len(line), line))
@@ -168,6 +174,7 @@ with open("in2.txt") as in2:
 #            p_index += 1
 #            p_index_str = getMyString(p_index)
 
+        # print out to find rule for exception to bold the text
 #        if llen > 5 and llen < 120:
 #            print("{}".format(line))
 #            o2.write(line)
@@ -178,22 +185,26 @@ with open("in2.txt") as in2:
             else:
                 ofile.write("</p>\n")
             ofile.write("<p>\n")
-            ofile.write("<span style='color:blue'>" + line + "</span><br>\n")
+            ofile.write("<span class='pi'>" + line + "</span><br>\n")
             p_index_str = line
+            bold_index = 0
         else:
-#            if line in execArray:
-#                print("p_index {} value {}".format(line, execArray[line]))
-#                o2.write(execArray[line])
-#            if len(line) > 5:
-#                if len(line) > 100:
-#                    ofile.write("<span>" + line.strip() + "</span><br>\n")
-#                else:
-#                    ofile.write("<span style='font-weight:bold'>" + line.strip() + "</span><br>\n")
             if len(line) > 4:
-                ofile.write(line + "<br>\n")
-ofile.write("</p>")
-ofile.write("</body>")
-ofile.write("</html>")
+                if p_index_str in execArray:
+                    if bold_index < execArray[p_index_str]:
+                        ofile.write("<b>" + line + "</b><br>\n")
+                        bold_index += 1
+                    else:
+                        ofile.write(line + "<br>\n")
+                else:
+                    if len(line) < 120:
+                        ofile.write("<b>" + line + "</b><br>\n")
+                    else:
+                        ofile.write(line + "<br>\n")
+
+ofile.write("</p>\n")
+ofile.write("</body>\n")
+ofile.write("</html>\n")
 
 ofile.close()
-o2.close()
+#o2.close()
