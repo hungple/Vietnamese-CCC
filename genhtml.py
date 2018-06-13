@@ -106,6 +106,23 @@ def getMyString(num):
                 s = str (num)
     return s
 
+# inStr = "4 - 9"
+def getPIndex(inStr):
+    mList = inStr.split(" - ")
+    firstNumStr = mList[0]
+    s = "0000"
+    if len(firstNumStr) == 1:
+        s = "000" + firstNumStr
+    else:
+        if len(firstNumStr) == 2:
+            s = "00" + firstNumStr
+        else:
+            if len(firstNumStr) == 3:
+                s = "0" + firstNumStr
+            else:
+                s = firstNumStr
+    return s
+
 ofile = open("out/new.html", "w")
 
 ofile.write("<!DOCTYPE html>\n")
@@ -115,6 +132,7 @@ ofile.write("<style>\n")
 ofile.write("table, th, td {\n")
 ofile.write("border: 1px solid orange;\n")
 ofile.write("border-collapse: collapse;\n")
+ofile.write("padding: 3px;\n")
 ofile.write("}\n")
 ofile.write(".pi {font-size:large; font-weight:bold; color:blue}\n")
 ofile.write("</style>\n")
@@ -124,7 +142,7 @@ ofile.write("<body>\n")
 ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
-
+ofile.write("<tr><td align='center'>Mở đầu</td><td>Lời mở đầu</td></tr>\n")
 
 
 flag = 0
@@ -132,6 +150,7 @@ first_word = ""
 with open("new/GLCG-part-1.txt") as in1:
     cnt = 0
     for line in in1:
+        line = line.strip()
 #        print("line {} flag {} contents {}".format(cnt, flag, line))
         cnt += 1
         if flag == 0:
@@ -142,7 +161,7 @@ with open("new/GLCG-part-1.txt") as in1:
                 flag = 2
             else:
                 if flag == 2:
-                    ofile.write("<tr><td>" + first_word.strip() + "</td><td>" + line.strip() + "</td></tr>\n")
+                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(first_word) + "'>" + first_word + "</a></td><td>" + line + "</td></tr>\n")
                     flag = 3
                 else:
                     flag = 0
@@ -185,7 +204,7 @@ with open("new/GLCG-part-2.txt") as in2:
             else:
                 ofile.write("</p>\n")
             ofile.write("<p>\n")
-            ofile.write("<span class='pi'>" + line + "</span><br>\n")
+            ofile.write("<span class='pi'><a name='" + line + "'>" + line + "</a></span><br>\n")
             p_index_str = line
             bold_index = 0
         else:
