@@ -107,6 +107,7 @@ def getMyString(num):
     return s
 
 # inStr = "4 - 9"
+# return "0004"
 def getPIndex(inStr):
     mList = inStr.split(" - ")
     firstNumStr = mList[0]
@@ -142,11 +143,11 @@ ofile.write("<body>\n")
 ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
-ofile.write("<tr><td align='center'>Mở đầu</td><td>Lời mở đầu</td></tr>\n")
+ofile.write("<tr><td align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
 
 
 flag = 0
-first_word = ""
+numbers_str = ""
 with open("new/GLCG-part-1.txt") as in1:
     cnt = 0
     for line in in1:
@@ -154,14 +155,14 @@ with open("new/GLCG-part-1.txt") as in1:
 #        print("line {} flag {} contents {}".format(cnt, flag, line))
         cnt += 1
         if flag == 0:
-            first_word = line
+            numbers_str = line
             flag = 1
         else:
             if flag == 1:
                 flag = 2
             else:
                 if flag == 2:
-                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(first_word) + "'>" + first_word + "</a></td><td>" + line + "</td></tr>\n")
+                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td>" + line + "</td></tr>\n")
                     flag = 3
                 else:
                     flag = 0
