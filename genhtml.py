@@ -1,5 +1,6 @@
 # coding=UTF-8
 
+
 execArray = {}
 execArray["0009"] = 0
 execArray["0027"] = 1
@@ -124,11 +125,30 @@ def getPIndex(inStr):
                 s = firstNumStr
     return s
 
+
+labelArray = {}
+labelArray[0] = "L0000"
+#labelArray[1] = "L0000"
+# numbers_str = "4 - 10"
+def addLabels(numbers_str):
+    mList = numbers_str.split(" - ")
+    firstNumStr = mList[0]
+    firstNum = int(firstNumStr)
+    secondNumStr = mList[1]
+    secondNum = int(secondNumStr)
+
+    label = "L" + getMyString(firstNum)
+    for x in range(firstNum, secondNum + 1):
+        #print("x {} label {}".format(x, label))
+        labelArray[x] = label
+
+
 ofile = open("out/new.html", "w")
 
 ofile.write("<!DOCTYPE html>\n")
 ofile.write("<html>\n")
 ofile.write("<head>\n")
+ofile.write("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n")
 ofile.write("<style>\n")
 ofile.write("table, th, td {\n")
 ofile.write("border: 1px solid orange;\n")
@@ -162,7 +182,8 @@ with open("new/GLCG-part-1.txt") as in1:
                 flag = 2
             else:
                 if flag == 2:
-                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td>" + line + "</td></tr>\n")
+                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td><a name='L" + getPIndex(numbers_str) + "'>" + line + "</a></td></tr>\n")
+                    addLabels(numbers_str)
                     flag = 3
                 else:
                     flag = 0
@@ -199,7 +220,7 @@ with open("new/GLCG-part-2.txt") as in2:
 #            print("{}".format(line))
 #            o2.write(line)
 
-        if len(line) == 4:
+        if len(line) == 4 and line.isdigit():
             if first_p == 1:
                 first_p = 0
             else:
@@ -215,12 +236,19 @@ with open("new/GLCG-part-2.txt") as in2:
                         ofile.write("<b>" + line + "</b><br>\n")
                         bold_index += 1
                     else:
-                        ofile.write(line + "<br>\n")
+                        if line.endswith("[Back]"):
+                            ofile.write(line[:-6] + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                        else:
+                            ofile.write(line + "<br>\n")
                 else:
                     if len(line) < 120:
                         ofile.write("<b>" + line + "</b><br>\n")
                     else:
-                        ofile.write(line + "<br>\n")
+                        if line.endswith("[Back]"):
+                            print("{}".format(p_index_str))
+                            ofile.write(line[:-6] + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                        else:
+                            ofile.write(line + "<br>\n")
 
 ofile.write("</p>\n")
 ofile.write("</body>\n")
