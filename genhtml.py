@@ -132,6 +132,8 @@ labelArray[0] = "L0000"
 # numbers_str = "4 - 10"
 def addLabels(numbers_str):
     mList = numbers_str.split(" - ")
+    # mList[0] holds "4"
+    # mList[0] holds "10"
     firstNumStr = mList[0]
     firstNum = int(firstNumStr)
     secondNumStr = mList[1]
