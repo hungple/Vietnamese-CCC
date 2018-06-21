@@ -145,6 +145,17 @@ def addLabels(numbers_str):
         labelArray[x] = label
 
 
+def fixParenthesis(inStr):
+    newStr = inStr.replace('[','(')
+    newStr2 = newStr.replace(']',')')
+
+    # lower case for any ()
+    newStr3 = newStr2.replace("(","<span class='tiny'>(")
+    newStr4 = newStr3.replace(")",")</span>")
+    return newStr4
+
+
+
 ofile = open("out/new.html", "w")
 
 ofile.write("<!DOCTYPE html>\n")
@@ -157,12 +168,15 @@ ofile.write("border: 1px solid orange;\n")
 ofile.write("border-collapse: collapse;\n")
 ofile.write("padding: 3px;\n")
 ofile.write("}\n")
-ofile.write(".pi {font-size:large; font-weight:bold; color:blue}\n")
+ofile.write(".pi {font-weight:bold; color:blue}\n")
+ofile.write(".tiny {font-size:small;}\n")
+ofile.write("p {font-size:large;}\n")
 ofile.write("</style>\n")
-ofile.write("<title>Vietname CCC</title>\n")
+ofile.write("<title>Giáo Lý Công Giáo</title>\n")
 ofile.write("</head>\n")
 ofile.write("<body>\n")
 ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
+ofile.write("<table style='width:100%;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
 ofile.write("<tr><td align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
@@ -233,26 +247,29 @@ with open("new/GLCG-part-2.txt") as in2:
             bold_index = 0
         else:
             if len(line) > 4:
+                # special exeception cases:
                 if p_index_str in execArray:
                     if bold_index < execArray[p_index_str]:
                         ofile.write("<b>" + line + "</b><br>\n")
                         bold_index += 1
                     else:
                         if line.endswith("[Back]"):
-                            ofile.write(line[:-6] + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
                         else:
-                            ofile.write(line + "<br>\n")
+                            ofile.write(fixParenthesis(line) + "<br>\n")
+                # regular cases
                 else:
                     if len(line) < 120:
                         ofile.write("<b>" + line + "</b><br>\n")
                     else:
                         if line.endswith("[Back]"):
-                            print("{}".format(p_index_str))
-                            ofile.write(line[:-6] + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                            # print("{}".format(p_index_str))
+                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
                         else:
-                            ofile.write(line + "<br>\n")
+                            ofile.write(fixParenthesis(line) + "<br>\n")
 
 ofile.write("</p>\n")
+ofile.write("</td></tr></table>\n")
 ofile.write("</body>\n")
 ofile.write("</html>\n")
 
