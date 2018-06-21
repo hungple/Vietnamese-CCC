@@ -170,6 +170,7 @@ ofile.write("padding: 3px;\n")
 ofile.write("}\n")
 ofile.write(".pi {font-weight:bold; color:blue}\n")
 ofile.write(".tiny {font-size:small;}\n")
+ofile.write(".med {font-size:medium;}\n")
 ofile.write("p {font-size:large;}\n")
 ofile.write("</style>\n")
 ofile.write("<title>Giáo Lý Công Giáo</title>\n")
@@ -254,7 +255,7 @@ with open("new/GLCG-part-2.txt") as in2:
                         bold_index += 1
                     else:
                         if line.endswith("[Back]"):
-                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
                         else:
                             ofile.write(fixParenthesis(line) + "<br>\n")
                 # regular cases
@@ -264,7 +265,7 @@ with open("new/GLCG-part-2.txt") as in2:
                     else:
                         if line.endswith("[Back]"):
                             # print("{}".format(p_index_str))
-                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'>[Back]</a><br>\n")
+                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
                         else:
                             ofile.write(fixParenthesis(line) + "<br>\n")
 
