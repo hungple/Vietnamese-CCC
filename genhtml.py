@@ -1,5 +1,13 @@
 # coding=UTF-8
 
+#() - tuple
+#A tuple is a sequence of items that can't be changed (immutable).
+
+#[] - list
+#A list is a sequence of items that can be changed (mutable).
+
+#{} - dictionary or set
+#A dictionary is a list of key-value pairs, with unique keys (mutable).
 
 execArray = {}
 execArray["0009"] = 0
@@ -181,7 +189,7 @@ ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
 ofile.write("<table style='width:100%;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
-ofile.write("<tr><td align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
+ofile.write("<tr><td width=101 align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
 
 
 flag = 0
