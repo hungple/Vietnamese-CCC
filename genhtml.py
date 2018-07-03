@@ -51,6 +51,7 @@ execArray["1716"] = 2
 execArray["1718"] = 1
 execArray["1720"] = 1
 execArray["1736"] = 0
+execArray["1748"] = 0
 execArray["1750"] = 1
 execArray["1763"] = 1
 execArray["1780"] = 0
@@ -92,7 +93,7 @@ execArray["2508"] = 0
 execArray["2509"] = 0
 execArray["2520"] = 1
 execArray["2529"] = 0
-execArray["2551"] = 0
+execArray["2551"] = 1
 execArray["2552"] = 0
 execArray["2613"] = 0
 execArray["2676"] = 0
@@ -217,6 +218,17 @@ with open("new/GLCG-part-1.txt") as in1:
 ofile.write("</table>")
 
 
+tfile = open("new/GLCG-part-2.txt", "w")
+tempfile = open("new/GLCG-part-2-a.txt")
+tfile.write(tempfile.read())
+tempfile.close()
+tempfile = open("new/GLCG-part-2-b.txt")
+tfile.write(tempfile.read())
+tempfile.close()
+tempfile = open("new/GLCG-part-2-c.txt")
+tfile.write(tempfile.read())
+tempfile.close()
+tfile.close()
 
 #p_index = 0
 p_index_str = "0000"
