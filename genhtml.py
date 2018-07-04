@@ -193,27 +193,17 @@ ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
 ofile.write("<tr><td width=101 align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
 
 
-flag = 0
 numbers_str = ""
 with open("new/GLCG-part-1.txt") as in1:
-    cnt = 0
     for line in in1:
         line = line.strip()
-#        print("line {} flag {} contents {}".format(cnt, flag, line))
-        cnt += 1
-        if flag == 0:
-            numbers_str = line
-            flag = 1
-        else:
-            if flag == 1:
-                flag = 2
+        if len(line)>3:
+            if line[0].isdigit():
+                numbers_str = line
+                #print("number line {}".format(numbers_str))
             else:
-                if flag == 2:
-                    ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td><a name='L" + getPIndex(numbers_str) + "'>" + line + "</a></td></tr>\n")
-                    addLabels(numbers_str)
-                    flag = 3
-                else:
-                    flag = 0
+                ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td><a name='L" + getPIndex(numbers_str) + "'>" + line + "</a></td></tr>\n")
+                addLabels(numbers_str)
 
 ofile.write("</table>")
 
@@ -240,7 +230,7 @@ bold_index = 0
 with open("new/GLCG-part-2.txt") as in2:
     cnt = 0
     for line in in2:
-#        print("cnt {} len {} text {}".format(cnt, len(line), line))
+        # print("cnt {} len {} text {}".format(cnt, len(line), line))
         cnt += 1
 
         line = line.strip()
@@ -285,7 +275,7 @@ with open("new/GLCG-part-2.txt") as in2:
                         ofile.write("<b>" + line + "</b><br>\n")
                     else:
                         if line.endswith("[Back]"):
-                            # print("{}".format(p_index_str))
+                            # print("xxx {}".format(p_index_str))
                             ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
                         else:
                             ofile.write(fixParenthesis(line) + "<br>\n")
