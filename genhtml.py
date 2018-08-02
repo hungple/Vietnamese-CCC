@@ -182,12 +182,57 @@ ofile.write(".pi {font-weight:bold; color:blue}\n")
 ofile.write(".tiny {font-size:small;}\n")
 ofile.write(".med {font-size:medium;}\n")
 ofile.write("p {font-size:large;}\n")
+
+ofile.write("/* Style the tab */\n")
+ofile.write(".tab {overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1;}\n")
+ofile.write("/* Style the buttons inside the tab */\n")
+ofile.write(".tab button {background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; font-size: 17px;}\n")
+ofile.write("/* Change background color of buttons on hover */\n")
+ofile.write(".tab button:hover {background-color: #ddd;}\n")
+ofile.write("/* Create an active/current tablink class */\n")
+ofile.write(".tab button.active {background-color: #ccc;}\n")
+ofile.write("/* Style the tab content */\n")
+ofile.write(".tabcontent {display: none; padding: 6px 12px; -webkit-animation: fadeEffect 1s; animation: fadeEffect 1s;}\n")
+ofile.write("/* Fade in tabs */\n")
+ofile.write("@-webkit-keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;}}\n")
+ofile.write("@keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;}}\n")
+
 ofile.write("</style>\n")
 ofile.write("<title>Giáo Lý Hội Thánh Công Giáo</title>\n")
 ofile.write("</head>\n")
+
 ofile.write("<body>\n")
 ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
-ofile.write("<table style='width:100%;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
+
+#ofile.write("<table style='width:100%;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
+ofile.write("<table style='width:550px;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
+ofile.write("  <div class='tab'>\n")
+ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab1')\" id=\"defaultOpen\">Mục lục</button>\n")
+ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab2')\">Số câu</button>\n")
+ofile.write("  </div>\n")
+ofile.write("</td></tr></table>\n")
+ofile.write("  <div id='Tab1' class='tabcontent'>\n")
+
+numbers_str = ""
+with open("new/table-content.txt") as in3:
+    for line in in3:
+        line = line.strip()
+        mList = line.split("[")
+        #mList[1] = '26]'' or '27-49]'
+        mList2 = mList[1].split("-")
+        indStr = ""
+        if mList2[0].endswith("]"):
+            #print("numberStr: {}".format(mList2[0][:-1]))
+            indStr = mList2[0][:-1]
+        else:
+            #print("numberStr: {}".format(mList2[0]))
+            indStr = mList2[0]
+        ofile.write(mList[0] + "<a href='#" + getPIndex(indStr) + "'>[" + mList[1] + "</a><br>\n")
+
+ofile.write("  </div>\n")
+
+ofile.write("  <div id='Tab2' class='tabcontent'>\n")
+
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
 ofile.write("<tr><td width=101 align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>\n")
@@ -205,8 +250,9 @@ with open("new/GLCG-part-1.txt") as in1:
                 ofile.write("<tr><td align='center'><a href='#" + getPIndex(numbers_str) + "'>" + numbers_str + "</a></td><td><a name='L" + getPIndex(numbers_str) + "'>" + line + "</a></td></tr>\n")
                 addLabels(numbers_str)
 
-ofile.write("</table>")
+ofile.write("</table>\n")
 
+ofile.write("  </div>\n")
 
 tfile = open("new/GLCG-part-2.txt", "w")
 tempfile = open("new/GLCG-part-2-a.txt")
@@ -266,7 +312,8 @@ with open("new/GLCG-part-2.txt") as in2:
                         bold_index += 1
                     else:
                         if line.endswith("[Back]"):
-                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
+                            # ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
+                            ofile.write(fixParenthesis(line[:-6]) + "<br>\n")
                         else:
                             ofile.write(fixParenthesis(line) + "<br>\n")
                 # regular cases
@@ -276,12 +323,31 @@ with open("new/GLCG-part-2.txt") as in2:
                     else:
                         if line.endswith("[Back]"):
                             # print("xxx {}".format(p_index_str))
-                            ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
+                            # ofile.write(fixParenthesis(line[:-6]) + "<a href='#" + labelArray[int(p_index_str)] + "'><span class='med'>[Back]</span></a><br>\n")
+                            ofile.write(fixParenthesis(line[:-6]) + "<br>\n")
                         else:
                             ofile.write(fixParenthesis(line) + "<br>\n")
 
 ofile.write("</p>\n")
-ofile.write("</td></tr></table>\n")
+#ofile.write("</td></tr></table>\n")
+ofile.write("<script>\n")
+ofile.write("function openTab(evt, tabName) {\n")
+ofile.write("    var i, tabcontent, tablinks;\n")
+ofile.write("    tabcontent = document.getElementsByClassName('tabcontent');\n")
+ofile.write("    for (i = 0; i < tabcontent.length; i++) {\n")
+ofile.write("        tabcontent[i].style.display = 'none';\n")
+ofile.write("    }\n")
+ofile.write("    tablinks = document.getElementsByClassName('tablinks');\n")
+ofile.write("    for (i = 0; i < tablinks.length; i++) {\n")
+ofile.write("        tablinks[i].className = tablinks[i].className.replace(' active', '');\n")
+ofile.write("    }\n")
+ofile.write("    document.getElementById(tabName).style.display = 'block';\n")
+ofile.write("    evt.currentTarget.className += ' active';\n")
+ofile.write("}\n")
+ofile.write("// Get the element with id=\"defaultOpen\" and click on it\n")
+ofile.write("document.getElementById(\"defaultOpen\").click();\n")
+ofile.write("</script>\n")
+
 ofile.write("</body>\n")
 ofile.write("</html>\n")
 
