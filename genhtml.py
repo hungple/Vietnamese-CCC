@@ -216,6 +216,9 @@ ofile.write("  <div id='Tab1' class='tabcontent'>\n")
 numbers_str = ""
 with open("new/table-content.txt") as in3:
     for line in in3:
+        prefix = ""
+        if line.startswith("  "):
+            prefix = "&nbsp;&nbsp;"
         line = line.strip()
         mList = line.split("[")
         #mList[1] = '26]'' or '27-49]'
@@ -227,7 +230,7 @@ with open("new/table-content.txt") as in3:
         else:
             #print("numberStr: {}".format(mList2[0]))
             indStr = mList2[0]
-        ofile.write(mList[0] + "<a href='#" + getPIndex(indStr) + "'>[" + mList[1] + "</a><br>\n")
+        ofile.write(prefix + mList[0] + "<a href='#" + getPIndex(indStr) + "'>[" + mList[1] + "</a><br>\n")
 
 ofile.write("  </div>\n")
 
