@@ -218,23 +218,23 @@ with open("new/table-content.txt") as in3:
     for line in in3:
         prefix = ""
         if line.startswith("1"):
-            prefix = "&nbsp;&nbsp;"
+            prefix = "&nbsp;&nbsp;&nbsp;"
         else:
             if line.startswith("2"):
-                prefix = "&nbsp;&nbsp;&nbsp;&nbsp;"
+                prefix = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
             else:
                 if line.startswith("3"):
-                    prefix = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                    prefix = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
         line = line.strip()
         mList = line.split("[")
         #mList[1] = '26]'' or '27-49]'
         mList2 = mList[1].split("-")
         indStr = ""
         if mList2[0].endswith("]"):
-            print("numberStr: {}".format(mList2[0][:-1]))
+            #print("numberStr: {}".format(mList2[0][:-1]))
             indStr = mList2[0][:-1]
         else:
-            print("numberStr: {}".format(mList2[0]))
+            #print("numberStr: {}".format(mList2[0]))
             indStr = mList2[0]
         ofile.write(prefix + mList[0][1:] + "<a href='#" + getPIndex(indStr) + "'>[" + mList[1] + "</a><br>\n")
 
