@@ -1,5 +1,7 @@
 # coding=UTF-8
 
+import traceback
+
 #() - tuple
 #A tuple is a sequence of items that can't be changed (immutable).
 
@@ -163,8 +165,6 @@ def fixParenthesis(inStr):
     newStr4 = newStr3.replace(")",")</span>")
     return newStr4
 
-
-
 ofile = open("out/new.html", "w")
 
 ofile.write("<!DOCTYPE html>\n")
@@ -205,14 +205,18 @@ ofile.write("<body>\n")
 ofile.write("<h3>Giáo Lý Hội Thánh Công Giáo</h3>\n")
 
 #ofile.write("<table style='width:100%;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
-ofile.write("<table style='width:550px;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
-ofile.write("  <div class='tab'>\n")
-ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab1')\" id=\"defaultOpen\">Mục lục</button>\n")
-ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab2')\">Số câu</button>\n")
-ofile.write("  </div>\n")
-ofile.write("</td></tr></table>\n")
-ofile.write("  <div id='Tab1' class='tabcontent'>\n")
+#ofile.write("<table style='width:550px;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>\n")
+#ofile.write("  <div class='tab'>\n")
+#ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab1')\" id=\"defaultOpen\">Mục lục</button>\n")
+#ofile.write("    <button class=\"tablinks\" onclick=\"openTab(event, 'Tab2')\">Số câu</button>\n")
+#ofile.write("  </div>\n")
+#ofile.write("</td></tr></table>\n")
 
+ofile.write("<div><a href='#mucluc'>Mục lục</a> - <a href='#socau'>Số câu</a>\n")
+
+#ofile.write("  <div id='Tab1' class='tabcontent'>\n")
+ofile.write("  <div>\n")
+ofile.write("  <h2><a name='mucluc'>Mục lục</a></h2>\n")
 numbers_str = ""
 with open("new/table-content.txt") as in3:
     for line in in3:
@@ -240,7 +244,10 @@ with open("new/table-content.txt") as in3:
 
 ofile.write("  </div>\n")
 
-ofile.write("  <div id='Tab2' class='tabcontent'>\n")
+ofile.write("  <h2><a name='socau'>Số câu</a></h2>\n")
+
+#ofile.write("  <div id='Tab2' class='tabcontent'>\n")
+ofile.write("  <div>\n")
 
 ofile.write("<table>\n")
 ofile.write("<tr><th>Câu</th><th>Đề Tài</th></tr>\n")
@@ -339,23 +346,24 @@ with open("new/GLCG-part-2.txt") as in2:
 
 ofile.write("</p>\n")
 #ofile.write("</td></tr></table>\n")
-ofile.write("<script>\n")
-ofile.write("function openTab(evt, tabName) {\n")
-ofile.write("    var i, tabcontent, tablinks;\n")
-ofile.write("    tabcontent = document.getElementsByClassName('tabcontent');\n")
-ofile.write("    for (i = 0; i < tabcontent.length; i++) {\n")
-ofile.write("        tabcontent[i].style.display = 'none';\n")
-ofile.write("    }\n")
-ofile.write("    tablinks = document.getElementsByClassName('tablinks');\n")
-ofile.write("    for (i = 0; i < tablinks.length; i++) {\n")
-ofile.write("        tablinks[i].className = tablinks[i].className.replace(' active', '');\n")
-ofile.write("    }\n")
-ofile.write("    document.getElementById(tabName).style.display = 'block';\n")
-ofile.write("    evt.currentTarget.className += ' active';\n")
-ofile.write("}\n")
-ofile.write("// Get the element with id=\"defaultOpen\" and click on it\n")
-ofile.write("document.getElementById(\"defaultOpen\").click();\n")
-ofile.write("</script>\n")
+
+#ofile.write("<script>\n")
+#ofile.write("function openTab(evt, tabName) {\n")
+#ofile.write("    var i, tabcontent, tablinks;\n")
+#ofile.write("    tabcontent = document.getElementsByClassName('tabcontent');\n")
+#ofile.write("    for (i = 0; i < tabcontent.length; i++) {\n")
+#ofile.write("        tabcontent[i].style.display = 'none';\n")
+#ofile.write("    }\n")
+#ofile.write("    tablinks = document.getElementsByClassName('tablinks');\n")
+#ofile.write("    for (i = 0; i < tablinks.length; i++) {\n")
+#ofile.write("        tablinks[i].className = tablinks[i].className.replace(' active', '');\n")
+#ofile.write("    }\n")
+#ofile.write("    document.getElementById(tabName).style.display = 'block';\n")
+#ofile.write("    evt.currentTarget.className += ' active';\n")
+#ofile.write("}\n")
+#ofile.write("// Get the element with id=\"defaultOpen\" and click on it\n")
+#ofile.write("document.getElementById(\"defaultOpen\").click();\n")
+#ofile.write("</script>\n")
 
 ofile.write("</body>\n")
 ofile.write("</html>\n")

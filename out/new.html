@@ -31,13 +31,9 @@ p {font-size:large;}
 </head>
 <body>
 <h3>Giáo Lý Hội Thánh Công Giáo</h3>
-<table style='width:550px;border:0px'><tr><td style='width:100%;border:0px;padding:0px;'>
-  <div class='tab'>
-    <button class="tablinks" onclick="openTab(event, 'Tab1')" id="defaultOpen">Mục lục</button>
-    <button class="tablinks" onclick="openTab(event, 'Tab2')">Số câu</button>
-  </div>
-</td></tr></table>
-  <div id='Tab1' class='tabcontent'>
+<div><a href='#mucluc'>Mục lục</a> - <a href='#socau'>Số câu</a>
+  <div>
+  <h2><a name='mucluc'>Mục lục</a></h2>
 Lời mở đầu <a href='#0000'>[0]</a><br>
 <b>Phần thứ nhất</b>: Tuyên xưng đức tin <a href='#0001'>[1-25]</a><br>
 &nbsp;&nbsp;&nbsp;<b>Đoạn thứ nhất</b>: Tôi tin, chúng tôi tin <a href='#0026'>[26]</a><br>
@@ -137,7 +133,8 @@ Lời mở đầu <a href='#0000'>[0]</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mục 2: Lạy Cha chúng con ở trên trời <a href='#2777'>[2777-2802]</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mục 3: Bảy lời cầu xin <a href='#2803'>[2803-2865]</a><br>
   </div>
-  <div id='Tab2' class='tabcontent'>
+  <h2><a name='socau'>Số câu</a></h2>
+  <div>
 <table>
 <tr><th>Câu</th><th>Đề Tài</th></tr>
 <tr><td width=101 align='center'><a href='#0000'>Mở đầu</a></td><td><a name='L0000'>Lời mở đầu</a></td></tr>
@@ -13245,22 +13242,5 @@ Trong lời xin cuối cùng "nhưng cứu chúng con cho khỏi sự dữ", cù
 <span class='pi'><a name='2865'>2865</a></span><br>
 Với tiếng A-men cuối cùng, chúng ta thưa "xin Chúa cứ làm cho con" như bảy lời nguyện xin, "ước gì được như vậy... "  <br>
 </p>
-<script>
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName('tabcontent');
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = 'none';
-    }
-    tablinks = document.getElementsByClassName('tablinks');
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(' active', '');
-    }
-    document.getElementById(tabName).style.display = 'block';
-    evt.currentTarget.className += ' active';
-}
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
 </body>
 </html>
